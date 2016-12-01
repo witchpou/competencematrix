@@ -2,7 +2,7 @@
 ## General Idea ##
 The Idea is based of the Developer Competency Matrix. It is used to find out the skill levels for candidates of computer sience. Hence, questions for different skill areas ared defined by evaluators. Candidates shall answer the questions. Evaluators review the answers and a skill-level is assigned to each competency of the candidate. At the and, all competencies and the reached level of the defined matrix are displayed for the candidate.
 
-![](https://raw.githubusercontent.com/witchpou/lirejarp/master/docs/images/CompetencyMatrix.png?raw=true)
+![](https://github.com/witchpou/competencematrix/blob/master/docs/images/CompetencyMatrix.png?raw=true)
 
 
 #Installation
@@ -22,7 +22,7 @@ The Idea is based of the Developer Competency Matrix. It is used to find out the
 ## Architecture ##
 For Architecture, see projects `lirejarp` and `lj-project builder`. The following class diagramm shows the general architecture.
 
-![](https://raw.githubusercontent.com/witchpou/lirejarp/master/docs/images/genericDomainPattern.png?raw=true)
+![](https://github.com/witchpou/competencematrix/blob/master/docs/images/genericDomainPattern.png?raw=true)
 
 The general packages are:
 
@@ -30,4 +30,4 @@ The general packages are:
 
 The domain objects are dislayed in the following picture:
 
-![](https://raw.githubusercontent.com/witchpou/lirejarp/master/docs/images/CompetencyMatrix.png?raw=true)
+![](https://github.com/witchpou/competencematrix/blob/master/docs/images/domainobjects.png?raw=true)

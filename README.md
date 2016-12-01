@@ -20,11 +20,16 @@ The Idea is based of the Developer Competency Matrix. It is used to find out the
 * browse to http://localhost:8080/competencymatrix
 
 ## Architecture ##
-For Architecture, see projects `lirejarp` and `lj-project builder`. The following class diagramm shows the general architecture.
-
-![](https://github.com/witchpou/competencematrix/blob/master/docs/images/genericDomainPattern.png?raw=true)
+For Architecture, see projects `lirejarp` and `lj-project builder`. 
 
 The general packages are:
+
+![](https://github.com/witchpou/competencematrix/blob/master/docs/images/komponentendiagrammPS.png?raw=true)
+
+The following class diagramm shows the general architecture.
+
+![](https://github.com/witchpou/competencematrix/blob/master/docs/images/classDiagramm.png?raw=true)
+
 
 ###Data Structure
 

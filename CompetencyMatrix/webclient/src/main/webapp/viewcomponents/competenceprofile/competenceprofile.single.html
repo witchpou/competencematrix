@@ -1,0 +1,31 @@
+<div id="headerBox" ng-include="'menu.html'"></div>
+<div id="bodyBox">
+<div class="contain">
+<form name="ctrl.form" ng-init="sent=true;">
+<fieldset>
+<label for="user">{{'competenceprofile.user' | translate}}:</label>
+<input name="user" id="user" type="text" ng-model="ctrl.competenceprofile.user"
+ng-pattern=""
+/>
+<label ng-show="ctrl.form.user.$error.pattern">{{'error.pattern' | translate}}</label>
+<div class="clear"></div>
+</fieldset>
+<fieldset>
+<label for="evaluator">{{'competenceprofile.evaluator' | translate}}:</label>
+<input name="evaluator" id="evaluator" type="text" ng-model="ctrl.competenceprofile.evaluator"
+/>
+<div class="clear"></div>
+</fieldset>
+<fieldset>
+<label for="competenceevaluations">{{'competenceprofile.competenceEvaluations' | translate}}:</label>
+<input name="competenceevaluations" id="competenceevaluations" type="text" ng-model="ctrl.competenceprofile.competenceEvaluations"
+/>
+<div class="clear"></div>
+</fieldset>
+<div class="submitArea">
+<button class="buttonRounded" ng-click="ctrl.gotoCompetenceProfile.all();"><img src="res/img/icons/back.png" border="0" /><span class="hidden">{{'button.back' | translate}}</span></button>
+<button class="buttonRounded right" ng-click="ctrl.doMaintain()"><img src="res/img/icons/save.png" border="0" /><span class="hidden">{{'button.save' | translate}}</span></button>
+</div>
+</form>
+</div>
+</div>

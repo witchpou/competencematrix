@@ -1,0 +1,37 @@
+<div id="headerBox" ng-include="'menu.html'"></div>
+
+<div id="subheaderBox" class="aCenter">
+	<div class="bottom">
+		<span class="button add"><a ng-click="ctrl.gotoCompetence.create();">* {{'button.add' | translate}}</a></span>
+		<span class="button"><a ng-click="ctrl.idSelected != null && ctrl.gotoCompetence.update(ctrl.idSelected);" ng-disabled="ctrl.idSelected == null">+ {{'button.update' | translate}}</a></span>
+		<span class="button"><a ng-click="ctrl.idSelected != null && ctrl.deleteCompetence(ctrl.idSelected);" ng-disabled="ctrl.idSelected == null">- {{'button.delete' | translate}}</a></span>
+		<div class="clearer"></div>
+	</div>
+</div>
+
+<div id="bodyBox">
+	<div class="contain">
+		<table>
+			<colgroup>
+	    		<col class="">
+	    		<col class="">
+	    	</colgroup>
+		<thead>
+			<tr>
+				<th>{{'competence.title' | translate}}</th>
+				<th>{{'competence.description' | translate}}</th>
+			</tr>	
+		</thead>
+		<tbody>
+			<tr ng-repeat="competence in ctrl.competenceAll" ng-click="ctrl.setSelected(competence.id)" 
+				ng-class="{selected: competence.id === ctrl.idSelected }" 
+				ng-dblclick="ctrl.setSelected(competence.id);ctrl.gotoCompetence.update(ctrl.idSelected);">
+
+				<td>{{competence.title}}</td>
+				<td>{{competence.description}}</td>
+			</tr>
+		</tbody>
+		<tfoot></tfoot>
+		</table>
+	</div>	
+</div>

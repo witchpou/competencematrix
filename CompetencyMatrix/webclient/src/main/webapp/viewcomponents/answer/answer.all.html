@@ -1,0 +1,40 @@
+<div id="headerBox" ng-include="'menu.html'"></div>
+
+<div id="subheaderBox" class="aCenter">
+	<div class="bottom">
+		<span class="button add"><a ng-click="ctrl.gotoAnswer.create();">* {{'button.add' | translate}}</a></span>
+		<span class="button"><a ng-click="ctrl.idSelected != null && ctrl.gotoAnswer.update(ctrl.idSelected);" ng-disabled="ctrl.idSelected == null">+ {{'button.update' | translate}}</a></span>
+		<span class="button"><a ng-click="ctrl.idSelected != null && ctrl.deleteAnswer(ctrl.idSelected);" ng-disabled="ctrl.idSelected == null">- {{'button.delete' | translate}}</a></span>
+		<div class="clearer"></div>
+	</div>
+</div>
+
+<div id="bodyBox">
+	<div class="contain">
+		<table>
+			<colgroup>
+	    		<col class="">
+	    		<col class="">
+	    		<col class="">
+	    	</colgroup>
+		<thead>
+			<tr>
+				<th>{{'answer.question' | translate}}</th>
+				<th>{{'answer.answer' | translate}}</th>
+				<th>{{'answer.passed' | translate}}</th>
+			</tr>	
+		</thead>
+		<tbody>
+			<tr ng-repeat="answer in ctrl.answerAll" ng-click="ctrl.setSelected(answer.id)" 
+				ng-class="{selected: answer.id === ctrl.idSelected }" 
+				ng-dblclick="ctrl.setSelected(answer.id);ctrl.gotoAnswer.update(ctrl.idSelected);">
+
+				<td>{{answer.question}}</td>
+				<td>{{answer.answer}}</td>
+				<td>{{answer.passed}}</td>
+			</tr>
+		</tbody>
+		<tfoot></tfoot>
+		</table>
+	</div>	
+</div>

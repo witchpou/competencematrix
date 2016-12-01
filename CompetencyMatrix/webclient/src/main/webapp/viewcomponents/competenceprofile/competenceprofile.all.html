@@ -1,0 +1,40 @@
+<div id="headerBox" ng-include="'menu.html'"></div>
+
+<div id="subheaderBox" class="aCenter">
+	<div class="bottom">
+		<span class="button add"><a ng-click="ctrl.gotoCompetenceProfile.create();">* {{'button.add' | translate}}</a></span>
+		<span class="button"><a ng-click="ctrl.idSelected != null && ctrl.gotoCompetenceProfile.update(ctrl.idSelected);" ng-disabled="ctrl.idSelected == null">+ {{'button.update' | translate}}</a></span>
+		<span class="button"><a ng-click="ctrl.idSelected != null && ctrl.deleteCompetenceProfile(ctrl.idSelected);" ng-disabled="ctrl.idSelected == null">- {{'button.delete' | translate}}</a></span>
+		<div class="clearer"></div>
+	</div>
+</div>
+
+<div id="bodyBox">
+	<div class="contain">
+		<table>
+			<colgroup>
+	    		<col class="">
+	    		<col class="">
+	    		<col class="">
+	    	</colgroup>
+		<thead>
+			<tr>
+				<th>{{'competenceprofile.user' | translate}}</th>
+				<th>{{'competenceprofile.evaluator' | translate}}</th>
+				<th>{{'competenceprofile.competenceEvaluations' | translate}}</th>
+			</tr>	
+		</thead>
+		<tbody>
+			<tr ng-repeat="competenceprofile in ctrl.competenceprofileAll" ng-click="ctrl.setSelected(competenceprofile.id)" 
+				ng-class="{selected: competenceprofile.id === ctrl.idSelected }" 
+				ng-dblclick="ctrl.setSelected(competenceprofile.id);ctrl.gotoCompetenceProfile.update(ctrl.idSelected);">
+
+				<td>{{competenceprofile.user}}</td>
+				<td>{{competenceprofile.evaluator}}</td>
+				<td>{{competenceprofile.competenceEvaluations}}</td>
+			</tr>
+		</tbody>
+		<tfoot></tfoot>
+		</table>
+	</div>	
+</div>

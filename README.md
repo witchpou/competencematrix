@@ -13,4 +13,5 @@ The Idea is based of the Developer Competency Matrix. It is used to find out the
 
 * git clone whole repo
 * go to CompetencyMatrix
+* run ```ant setup_project```
 * browse to http://localhost:8080/competencymatrix

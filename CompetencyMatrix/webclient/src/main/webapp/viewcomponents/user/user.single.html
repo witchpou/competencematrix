@@ -37,6 +37,15 @@ ng-maxlength="150"
 <label ng-show="ctrl.form.login.$error.maxlength">{{'error.maxlength' | translate}}</label>
 <label ng-show="ctrl.form.login.$error.pattern">{{'error.pattern' | translate}}</label>
 <div class="clear"></div>
+<fieldset>
+<label for="role">{{'user.role' | translate}}:</label>
+<select name="role" id="role" ng-model="ctrl.user.role">
+      <option value="CANDIDATE">Bewerber</option>
+      <option value="EVALUATOR">Gutachter</option>
+      <option value="ADMIN">Administrator</option>
+</select>
+<div class="clear"></div>
+</fieldset>
 </fieldset>
 <fieldset>
 <div class="clear"></div>

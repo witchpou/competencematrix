@@ -18,19 +18,19 @@ public class UserEntity extends AbstractEntity {
 	
 	//domain attributes
 	
-	@Pattern(regexp = "/^[a-zA-Z0-9]*$/")
+	@Pattern(regexp = "^[a-zA-Z0-9]*$")
 	@Size(min = 1, max = 150)
 	private String firstname;
 	
-	@Pattern(regexp = "/^[a-zA-Z0-9]*$/")
+	@Pattern(regexp = "^[a-zA-Z0-9]*$")
 	@Size(min = 1, max = 150)
 	private String lastname;
 	
-	@Pattern(regexp = "/^[a-zA-Z0-9]*$/")
+	@Pattern(regexp = "^[a-zA-Z0-9]*$")
 	@Size(min = 1, max = 150)
 	private String login;
 	
-	private Enum role;
+	private Role role;
 	
 	
 
@@ -63,11 +63,11 @@ public class UserEntity extends AbstractEntity {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name="ROLE")
-	public Enum getRole() {
+	public Role getRole() {
 		return role;
 	}
 	
-	public void setRole(Enum role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 }

@@ -18,7 +18,7 @@ public class QuestionEntity extends AbstractEntity {
 	
 	//domain attributes
 	
-	@Pattern(regexp = "/^[a-zA-Z0-9]*$/")
+	@Pattern(regexp = "^[a-zA-Z0-9]*$")
 	@Size(min = 1, max = 150)
 	private String competence;
 	
@@ -26,11 +26,11 @@ public class QuestionEntity extends AbstractEntity {
 	@Max(value = 3)
 	private Integer level;
 	
-	@Pattern(regexp = "/^[a-zA-Z0-9]*$/")
+	@Pattern(regexp = "^[a-zA-Z0-9]*$")
 	@Size(min = 1, max = 260)
 	private String description;
 	
-	@Pattern(regexp = "/^[a-zA-Z0-9]*$/")
+	@Pattern(regexp = "^[a-zA-Z0-9]*$")
 	@Size(min = 1, max = 150)
 	private String title;
 	

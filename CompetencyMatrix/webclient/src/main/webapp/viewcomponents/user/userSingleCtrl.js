@@ -45,6 +45,7 @@
 				}
 				if ($routeParams.is == null) {
 					ctrl.user = {};
+					ctrl.user.role = "CANDIDATE";
 				}
 			});
 		}

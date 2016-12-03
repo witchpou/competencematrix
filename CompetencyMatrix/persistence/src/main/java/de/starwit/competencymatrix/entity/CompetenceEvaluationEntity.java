@@ -15,7 +15,7 @@ public class CompetenceEvaluationEntity extends AbstractEntity {
 	
 	//domain attributes
 	
-	@Pattern(regexp = "/^[a-zA-Z0-9]*$/")
+	@Pattern(regexp = "^[a-zA-Z0-9]*$")
 	private String competence;
 	
 	private String answers;

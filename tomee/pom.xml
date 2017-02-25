@@ -31,9 +31,9 @@
 				<plugin>
 					<groupId>org.apache.tomee.maven</groupId>
 					<artifactId>tomee-maven-plugin</artifactId>
-					<version>7.0.1</version>
+					<version>7.0.2</version>
 					<configuration>
-						<tomeeVersion>7.0.1</tomeeVersion>
+						<tomeeVersion>7.0.2</tomeeVersion>
 						<tomeeClassifier>plus</tomeeClassifier>
 						<debug>false</debug>
 						<tomeeHttpPort>8080</tomeeHttpPort>
@@ -74,10 +74,6 @@
 			</build>
 		</profile>
 		<profile>
-			<!-- 
-				This setup (will) configure tomee to have an authorization realm delivered by an LDAP.
-				LDAP is not included in this package! You still need to run your LDAP server somewhere else.
-			 -->
 			<id>mysql</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>

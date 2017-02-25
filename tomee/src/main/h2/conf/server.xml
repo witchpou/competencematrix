@@ -40,11 +40,11 @@
     <!-- Editable user database that can also be used by
          UserDatabaseRealm to authenticate users
     -->
-    <Resource name="UserDatabase" auth="Container"
-              type="org.apache.catalina.UserDatabase"
-              description="User database that can be updated and saved"
-              factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
-              pathname="conf/tomcat-users.xml" />
+<!--     <Resource name="UserDatabase" auth="Container" -->
+<!--               type="org.apache.catalina.UserDatabase" -->
+<!--               description="User database that can be updated and saved" -->
+<!--               factory="org.apache.catalina.users.MemoryUserDatabaseFactory" -->
+<!--               pathname="conf/tomcat-users.xml" /> -->
   </GlobalNamingResources>
 
   <!-- A "Service" is a collection of one or more "Connectors" that share
@@ -131,16 +131,17 @@
       <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"/>
       -->
 
-      <!-- Use the LockOutRealm to prevent attempts to guess user passwords
-           via a brute-force attack -->
-      <Realm className="org.apache.catalina.realm.LockOutRealm">
-        <!-- This Realm uses the UserDatabase configured in the global JNDI
-             resources under the key "UserDatabase".  Any edits
-             that are performed against this UserDatabase are immediately
-             available for use by the Realm.  -->
-        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
-               resourceName="UserDatabase"/>
-      </Realm>
+
+	<!-- default credentials - will NOT work in production environment -->
+      <Realm   className="org.apache.catalina.realm.JNDIRealm"
+                connectionName="uid=admin,ou=system"
+                connectionPassword="secret"
+                connectionURL="ldap://localhost:11389"
+                userPattern="uid={0},ou=users,dc=starwit,dc=de"
+                roleBase="ou=groups,dc=starwit,dc=de"
+                roleName="cn"
+                roleSearch="(uniqueMember={0})"
+      />
 
       <Host name="localhost"  appBase="${project.parent.basedir}/CompetencyMatrix/target"
             unpackWARs="true" autoDeploy="true">

@@ -15,15 +15,35 @@
 	<property name="sql_user_create" value="
 			CREATE USER 'competencymatrix'@'localhost' IDENTIFIED BY 'competencymatrix';
 			GRANT ALL PRIVILEGES ON competencymatrix.* TO 'competencymatrix'@'localhost';" />
-
-	<target name="setup_project" depends="h2,stop_tomee,build_tomee,build_application,run_tomee"></target>
-	<target name="setup_project_mysql" depends="mysql,stop_tomee,build_tomee,build_application,run_tomee"></target>
+	
+	<target name="setup_project" depends="stop_tomee,build_tomee,build_application,run_tomee"></target>
 	<target name="rebuild_application" depends="stop_tomee,build_application,run_tomee"></target>
 	<target name="clean_all" depends="stop_tomee,clean_tomee,clean_application"></target>
 	<target name="create_mysql_database" depends="db_args, setup_database"></target>
-
+	
+	<target name="init">
+		<condition property="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect">
+			<equals arg1="${db}" arg2="mysql" />
+		</condition>
+		<condition property="profile.db" value="mysql">
+			<equals arg1="${db}" arg2="mysql" />
+		</condition>
+		
+		<condition property="hibernate.dialect" value="org.hibernate.dialect.H2Dialect">
+			<not>
+				<isset property="${db}"/>
+			</not>
+		</condition>
+		<condition property="profile.db" value="h2">
+			<not>
+				<isset property="${db}"/>
+			</not>
+		</condition>
+	</target>
+	
 	<target name="copy_frontend_local">
-		<echo>copy web frontend from ${src} to ${dest}</echo>
+		<echo>copy web frontend from ${ui_src}</echo>
+		<echo>to ${ui_dest}</echo>
 		<copy todir="${ui_dest}">
 			<fileset dir="${ui_src}" />
 		</copy>
@@ -34,27 +54,16 @@
 		<copy todir="${local_as}" file="${basedir}/${warfile}"></copy>
 	</target>
 	
-	<target name="h2">
-		<echo>set database dialect to h2</echo>
-		<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
-		<property name="profile.db" value="h2" />
-	</target>
-
-	<target name="mysql">
-		<echo>set database dialect to mysql</echo>
-		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
-		<property name="profile.db" value="mysql" />
-	</target>
-	
-	<target name="build_application">
+	<target name="build_application" depends="init">
 		<echo>build war</echo>
+		<echo>${hibernate.dialect}</echo>
 		<antcall target="call_maven">
 			<param name="exec_dir" value="."/>
 			<param name="mvn_command" value="clean package -Dmaven.test.skip=true -Dhibernate.dialect=${hibernate.dialect}"/>
 		</antcall>	
 	</target>
 	
-	<target name="build_application_with_tests">
+	<target name="build_application_with_tests" depends="init">
 		<echo>build war</echo>
 		<antcall target="call_maven">
 			<param name="exec_dir" value="."/>
@@ -69,8 +78,7 @@
 		</antcall>		
 	</target>
 
-	<target name="build_tomee" description="build tomee">
-		<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+	<target name="build_tomee" description="build tomee" depends="init">
 		<antcall target="call_maven">
 			<param name="exec_dir" value="${basedir}/${runtime_path}"/>
 			<param name="mvn_command" value="tomee:build -P${profile.db}"/>
@@ -154,9 +162,8 @@
 	<target name="info">
 		<echo>Provides various scripts to build and run application. Most stuff should run on Linux + Windows</echo>
 		<echo>Targets available:</echo>
-		<echo>setup_project: 		uses h2 database, download tomee, build app, start tomee</echo>
-		<echo>setup_project_mysql: 		uses mysql database, download tomee, build app, start tomee</echo>
-		<echo>create_mysql_database: 		creates mysql database, user and password for the project</echo>
+		<echo>setup_project: 		uses database, download tomee, build app, start tomee</echo>
+		<echo>create_mysql_database: 	creates mysql database, user and password for the project</echo>
 		<echo>rebuild_application: 	stop tomee, build app, start tomee</echo>
 		<echo>clean_all: 			stop tomee, clean app, clean tomee</echo>
 		<echo>copy_frontend_local: 	copies web frontend into local deployment folder (designer shortcut ;))</echo>
@@ -167,5 +174,7 @@
 		<echo>stop_tomee: 		stop tomee</echo>
 		<echo>run_tomee: 			start tomee</echo>
 		<echo>clean_tomee: 		start tomee</echo>
+		<echo></echo>
+		<echo>Set database type via -Ddb=mysql. If no param h2 will be used. </echo>
 	</target>
 </project>

@@ -38,11 +38,48 @@
 	 * @param $scope
 	 * @returns
 	 */
-	function appController($scope) {
+	function appController($scope, $http) {
 		$scope.$on('$routeChangeSuccess', function (scope, next, current) {
 			$scope.title=next.title;
 			$scope.subtitle=next.subtitle;
 		});
+		
+		$scope.credInput = false;
+		$scope.username = "";
+		$scope.password = "";
+		
+		$scope.loginCheck = function() {
+			console.log('checking log in status');
+			$http.get('check.jsp').then(checkIfUserIsStillLoggedIn, function(){console.log('error')});			
+		};
+		
+		$scope.login = function() {
+			console.log($scope);
+			$http.get('backend/index.html').then(
+					function() {
+						console.log('requested start page restricted area');
+						console.log('requesting access with ' + $scope.username + ':' + $scope.password);
+						$http({
+						    method: 'POST',
+						    url: 'backend/j_security_check',
+						    data: 'j_password=' + $scope.password + '&j_username=' + $scope.password,
+						    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+						    success: function(resp){console.log(resp); $scope.credInput=false;},
+						    error: function(resp){console.log(resp)}
+						});
+					}
+				);
+
+		};
+		
+		function checkIfUserIsStillLoggedIn(httpResponse) {
+			console.log(httpResponse);
+			var data = httpResponse.data;
+			if(data.indexOf('null') !== -1) {
+				console.log('not logged in');
+				$scope.credInput = true;
+			}
+		}
 	}
 
 	/**

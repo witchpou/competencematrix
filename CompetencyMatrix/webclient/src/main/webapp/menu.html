@@ -2,7 +2,15 @@
 	<tbody>
 		<tr>
 			<td>
-				<span class="imgLink logo"><a href="backend/index.html" name="home"><img src="{{'logo.url' | translate}}" /></a></span>
+				<span class="imgLink logo">
+					<a href="backend/index.html" name="home"><img src="{{'logo.url' | translate}}" /></a>
+					<button ng-click="loginCheck()">test</button>
+					<div ng-show="credInput">
+						<input type="text" id="username" ng-model="username" /> 
+						<input type="password" id="password" ng-model="password" />
+						<button ng-click="login()">Login</button>
+					</div>
+				</span>
 			</td>
 			<td>
 				<ul>
